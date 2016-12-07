@@ -55,7 +55,7 @@ public abstract class LoadingLayoutBase extends FrameLayout implements ILoadingL
     /**
      * get the LoadingLayout height or width
      *
-     * @return size
+     * @return size the LoadingLayout height or width
      */
     public abstract int getContentSize();
 
@@ -118,5 +118,4 @@ public abstract class LoadingLayoutBase extends FrameLayout implements ILoadingL
             }
         }
     }
-
 }

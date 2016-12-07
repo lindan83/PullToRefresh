@@ -196,6 +196,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @return boolean value
      * @deprecated See {@link #isScrollingWhileRefreshingEnabled()}.
      */
     public final boolean isDisableScrollingWhileRefreshing() {
@@ -378,6 +379,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param disableScrollingWhileRefreshing disableScrollingWhileRefreshing
      * @deprecated See {@link #setScrollingWhileRefreshingEnabled(boolean)}
      */
     public void setDisableScrollingWhileRefreshing(boolean disableScrollingWhileRefreshing) {
@@ -390,6 +392,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param label label
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy()}.
      */
@@ -398,6 +401,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param drawable drawable
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy()}.
      */
@@ -406,6 +410,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param drawable drawable
+     * @param mode     mode
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy(boolean, boolean)}.
      */
@@ -463,6 +469,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param pullLabel pullLabel
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy()}.
      */
@@ -471,6 +478,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param mode      mode
+     * @param pullLabel pullLabel
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy(boolean, boolean)}.
      */
@@ -515,6 +524,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param refreshingLabel refreshingLabel
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy()}.
      */
@@ -523,6 +533,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param mode            mode
+     * @param refreshingLabel refreshingLabel
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy(boolean, boolean)}.
      */
@@ -532,6 +544,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param releaseLabel releaseLabel
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy()}.
      */
@@ -540,6 +553,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
+     * @param mode         mode
+     * @param releaseLabel releaseLabel
      * @deprecated You should now call this method on the result of
      * {@link #getLoadingLayoutProxy(boolean, boolean)}.
      */
@@ -597,6 +612,10 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     /**
      * Used internally for adding view. Need because we override addView to
      * pass-through to the Refreshable View
+     *
+     * @param child  child
+     * @param index  index
+     * @param params params
      */
     protected final void addViewInternal(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
@@ -605,6 +624,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     /**
      * Used internally for adding view. Need because we override addView to
      * pass-through to the Refreshable View
+     *
+     * @param child  child
+     * @param params params
      */
     protected final void addViewInternal(View child, ViewGroup.LayoutParams params) {
         super.addView(child, -1, params);
@@ -620,6 +642,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     /**
      * Used internally for {@link #getLoadingLayoutProxy(boolean, boolean)}.
      * Allows derivative classes to include any extra LoadingLayouts.
+     *
+     * @param includeEnd   includeEnd
+     * @param includeStart includeStart
      */
     protected LoadingLayoutProxy createLoadingLayoutProxy(final boolean includeStart, final boolean includeEnd) {
         LoadingLayoutProxy proxy = new LoadingLayoutProxy();
@@ -638,7 +663,6 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
      * This is implemented by derived classes to return the created View. If you
      * need to use a custom View (such as a custom ListView), override this
      * method and return an instance of your custom class.
-     * <p>
      * Be sure to set the ID of the view in this method, especially if you're
      * using a ListActivity or ListFragment.
      *
@@ -1184,7 +1208,6 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
     /**
      * Actions a Pull Event
-     * <p>
      * return true if the Event has been handled, false if there has been no
      * change
      */
@@ -1523,6 +1546,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         /**
          * onRefresh will be called for both a Pull from start, and Pull from
          * end
+         * @param refreshView refreshView
          */
         void onRefresh(final PullToRefreshBase<V> refreshView);
 
@@ -1541,12 +1565,14 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         /**
          * onPullDownToRefresh will be called only when the user has Pulled from
          * the start, and released.
+         * @param refreshView refreshView
          */
         void onPullDownToRefresh(final PullToRefreshBase<V> refreshView);
 
         /**
          * onPullUpToRefresh will be called only when the user has Pulled from
          * the end, and released.
+         * @param refreshView refreshView
          */
         void onPullUpToRefresh(final PullToRefreshBase<V> refreshView);
 

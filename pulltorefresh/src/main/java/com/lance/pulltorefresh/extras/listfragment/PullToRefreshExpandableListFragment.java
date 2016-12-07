@@ -16,18 +16,16 @@
 package com.lance.pulltorefresh.extras.listfragment;
 
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 
 import com.lance.pulltorefresh.PullToRefreshExpandableListView;
 
 /**
  * A sample implementation of how to use {@link PullToRefreshExpandableListView}
- * with {@link ListFragment}. This implementation simply replaces the ListView
+ * with ListFragment.This implementation simply replaces the ListView
  * that {@code ListFragment} creates with a new
  * {@code PullToRefreshExpandableListView}. This means that ListFragment still
  * works 100% (e.g. <code>setListShown(...)</code> ).
- * <p/>
  * The new PullToRefreshListView is created in the method
  * {@link #onCreatePullToRefreshListView(LayoutInflater, Bundle)}. If you wish
  * to customise the {@code PullToRefreshExpandableListView} then override this

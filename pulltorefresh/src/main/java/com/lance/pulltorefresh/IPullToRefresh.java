@@ -192,14 +192,14 @@ public interface IPullToRefresh<T extends View> {
     /**
      * Set a header LoadingLayout for the Widget
      *
-     * @param headerLayout
+     * @param headerLayout headerLayout to show refreshing layout
      */
     void setHeaderLayout(LoadingLayoutBase headerLayout);
 
     /**
      * Set a footer LoadingLayout for the Widget
      *
-     * @param footerLayout
+     * @param footerLayout footerLayout to show loading layout
      */
     void setFooterLayout(LoadingLayoutBase footerLayout);
 
@@ -208,7 +208,7 @@ public interface IPullToRefresh<T extends View> {
      * can add footer just like ListView or
      * WrapRecyclerView(https://github.com/xuehuayous/WrapRecyclerView)
      *
-     * @param view
+     * @param view view
      */
     void setSecondFooterLayout(View view);
 
@@ -257,22 +257,21 @@ public interface IPullToRefresh<T extends View> {
      * A mutator to enable/disable whether the 'Refreshing' View should be
      * automatically shown when refreshing.
      *
-     * @param showView
+     * @param showView showView
      */
     void setShowViewWhileRefreshing(boolean showView);
 
     /**
      * set weather has friction when pull down
      *
-     * @param hasPullDownFriction
+     * @param hasPullDownFriction hasPullDownFriction
      */
     void setHasPullDownFriction(boolean hasPullDownFriction);
 
     /**
      * set weather has friction when pull up
      *
-     * @param hasPullUpFriction
+     * @param hasPullUpFriction hasPullUpFriction
      */
     void setHasPullUpFriction(boolean hasPullUpFriction);
-
 }

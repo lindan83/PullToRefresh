@@ -290,10 +290,6 @@ abstract class LoadingLayout extends LoadingLayoutBase {
         mHeaderText.setTypeface(tf);
     }
 
-    /**
-     * Callbacks for derivative Layouts
-     */
-
     protected abstract int getDefaultDrawableResId();
 
     protected abstract void onLoadingDrawableSet(Drawable imageDrawable);
