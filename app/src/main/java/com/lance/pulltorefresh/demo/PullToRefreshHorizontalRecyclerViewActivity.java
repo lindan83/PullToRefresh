@@ -14,18 +14,18 @@ import android.widget.Toast;
 import com.lance.common.recyclerview.adapter.AbstractRecyclerViewAdapter;
 import com.lance.common.recyclerview.adapter.CommonRecyclerViewAdapter;
 import com.lance.common.recyclerview.adapter.base.CommonRecyclerViewHolder;
-import com.lance.pulltorefresh.DefaultLoadingFooterLayout;
-import com.lance.pulltorefresh.DefaultRefreshingHeaderLayout;
 import com.lance.pulltorefresh.PullToRefreshBase;
-import com.lance.pulltorefresh.PullToRefreshRecyclerView;
+import com.lance.pulltorefresh.PullToRefreshHorizontalRecyclerView;
+import com.lance.pulltorefresh.demo.view.HorizontalLoadingFooterLayout;
+import com.lance.pulltorefresh.demo.view.HorizontalRefreshingHeaderLayout;
 import com.lance.pulltorefresh.extras.SoundPullEventListener;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class PullToRefreshRecyclerViewActivity extends AppCompatActivity {
+public class PullToRefreshHorizontalRecyclerViewActivity extends AppCompatActivity {
     private static final String TAG = "RecyclerView";
-    private PullToRefreshRecyclerView mPullRefreshRecycler;
+    private PullToRefreshHorizontalRecyclerView mPullRefreshRecycler;
     private CommonRecyclerViewAdapter<String> mAdapter;
     private LinkedList<String> mData;
     private String[] mStrings = {"Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
@@ -37,14 +37,13 @@ public class PullToRefreshRecyclerViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pull_to_refresh_recycler_view);
+        setContentView(R.layout.activity_pull_to_refresh_horizontal_recycler_view);
 
-        mPullRefreshRecycler = (PullToRefreshRecyclerView) findViewById(R.id.pull_refresh_recycler);
+        mPullRefreshRecycler = (PullToRefreshHorizontalRecyclerView) findViewById(R.id.pull_refresh_recycler);
         mPullRefreshRecycler.setMode(PullToRefreshBase.Mode.BOTH);
         //设置自定义刷新头部和加载底部
-        mPullRefreshRecycler.setHeaderLayout(new DefaultRefreshingHeaderLayout(this));
-        //mPullRefreshRecycler.setHeaderLayout(new JingDongHeaderLayout(this, PullToRefreshBase.Mode.PULL_FROM_START));
-        mPullRefreshRecycler.setFooterLayout(new DefaultLoadingFooterLayout(this));
+        mPullRefreshRecycler.setHeaderLayout(new HorizontalRefreshingHeaderLayout(this));
+        mPullRefreshRecycler.setFooterLayout(new HorizontalLoadingFooterLayout(this));
         // Set a listener to be invoked when the list should be refreshed.
         mPullRefreshRecycler.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
@@ -54,26 +53,26 @@ public class PullToRefreshRecyclerViewActivity extends AppCompatActivity {
 
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                new GetDataTask(true).execute();
+                new PullToRefreshHorizontalRecyclerViewActivity.GetDataTask(true).execute();
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-                new GetDataTask(false).execute();
+                new PullToRefreshHorizontalRecyclerViewActivity.GetDataTask(false).execute();
             }
         });
 
         RecyclerView recyclerView = mPullRefreshRecycler.getRefreshableView();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
         // Need to use the Actual RecyclerView when registering for Context Menu
         registerForContextMenu(recyclerView);
 
         mData = new LinkedList<>();
         mData.addAll(Arrays.asList(mStrings));
 
-        mAdapter = new CommonRecyclerViewAdapter<String>(this, R.layout.item_vertical_recycler_view, mData) {
+        mAdapter = new CommonRecyclerViewAdapter<String>(this, R.layout.item_horizontal_recycler_view, mData) {
             @Override
             protected void convert(CommonRecyclerViewHolder holder, String item, int position) {
                 holder.setText(R.id.tv_item, item);
@@ -95,7 +94,7 @@ public class PullToRefreshRecyclerViewActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new AbstractRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                Toast.makeText(PullToRefreshRecyclerViewActivity.this, mAdapter.getData().get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PullToRefreshHorizontalRecyclerViewActivity.this, mAdapter.getData().get(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
