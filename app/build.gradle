@@ -28,5 +28,5 @@ dependencies {
     compile project(':pulltorefresh')
     compile 'com.lance.common:adapter:0.0.1'
     compile files('libs/nineoldandroids-library-2.4.0.jar')
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
 }
