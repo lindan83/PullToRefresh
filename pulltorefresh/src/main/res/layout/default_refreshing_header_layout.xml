@@ -17,18 +17,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@string/pull_to_refresh_default_refreshing_text"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"/>
 
             <ProgressBar
                 android:id="@+id/pb_refreshing_progress"
+                style="@android:style/Widget.ProgressBar.Small.Inverse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                style="@android:style/Widget.ProgressBar.Small.Inverse"
-                android:layout_toLeftOf="@+id/tv_refreshing_text"/>
+                android:layout_toLeftOf="@+id/tv_refreshing_text"
+                android:layout_toStartOf="@+id/tv_refreshing_text"/>
         </RelativeLayout>
 
     </FrameLayout>

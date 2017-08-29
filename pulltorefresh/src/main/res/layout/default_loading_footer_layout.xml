@@ -17,6 +17,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@string/pull_to_refresh_default_loading_text"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"/>
@@ -27,8 +29,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/tv_refreshing_text"/>
+                android:layout_toLeftOf="@+id/tv_refreshing_text"
+                android:layout_toStartOf="@+id/tv_refreshing_text"/>
         </RelativeLayout>
     </FrameLayout>
 </merge>
