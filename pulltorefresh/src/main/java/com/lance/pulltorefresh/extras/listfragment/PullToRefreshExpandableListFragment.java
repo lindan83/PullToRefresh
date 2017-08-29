@@ -39,5 +39,4 @@ public class PullToRefreshExpandableListFragment extends PullToRefreshBaseListFr
                                                                             Bundle savedInstanceState) {
         return new PullToRefreshExpandableListView(getActivity());
     }
-
 }

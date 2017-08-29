@@ -47,22 +47,13 @@ public class PullToRefreshViewPager extends PullToRefreshBase<ViewPager> {
         ViewPager refreshableView = getRefreshableView();
 
         PagerAdapter adapter = refreshableView.getAdapter();
-        if (null != adapter) {
-            return refreshableView.getCurrentItem() == 0;
-        }
-
-        return false;
+        return null != adapter && refreshableView.getCurrentItem() == 0;
     }
 
     @Override
     protected boolean isReadyForPullEnd() {
         ViewPager refreshableView = getRefreshableView();
-
         PagerAdapter adapter = refreshableView.getAdapter();
-        if (null != adapter) {
-            return refreshableView.getCurrentItem() == adapter.getCount() - 1;
-        }
-
-        return false;
+        return null != adapter && refreshableView.getCurrentItem() == adapter.getCount() - 1;
     }
 }

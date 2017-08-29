@@ -50,41 +50,41 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
     public PullToRefreshWebView(Context context) {
         super(context);
 
-        /**
+        /*
          * Added so that by default, Pull-to-Refresh refreshes the page
          */
         setOnRefreshListener(defaultOnRefreshListener);
-        mRefreshableView.setWebChromeClient(defaultWebChromeClient);
+        refreshableView.setWebChromeClient(defaultWebChromeClient);
     }
 
     public PullToRefreshWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        /**
+        /*
          * Added so that by default, Pull-to-Refresh refreshes the page
          */
         setOnRefreshListener(defaultOnRefreshListener);
-        mRefreshableView.setWebChromeClient(defaultWebChromeClient);
+        refreshableView.setWebChromeClient(defaultWebChromeClient);
     }
 
     public PullToRefreshWebView(Context context, Mode mode) {
         super(context, mode);
 
-        /**
+        /*
          * Added so that by default, Pull-to-Refresh refreshes the page
          */
         setOnRefreshListener(defaultOnRefreshListener);
-        mRefreshableView.setWebChromeClient(defaultWebChromeClient);
+        refreshableView.setWebChromeClient(defaultWebChromeClient);
     }
 
     public PullToRefreshWebView(Context context, Mode mode, AnimationStyle style) {
         super(context, mode, style);
 
-        /**
+        /*
          * Added so that by default, Pull-to-Refresh refreshes the page
          */
         setOnRefreshListener(defaultOnRefreshListener);
-        mRefreshableView.setWebChromeClient(defaultWebChromeClient);
+        refreshableView.setWebChromeClient(defaultWebChromeClient);
     }
 
     @Override
@@ -107,37 +107,35 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 
     @Override
     protected boolean isReadyForPullStart() {
-        return mRefreshableView.getScrollY() == 0;
+        return refreshableView.getScrollY() == 0;
     }
 
     @Override
     protected boolean isReadyForPullEnd() {
-        float exactContentHeight = (float) Math.floor(mRefreshableView.getContentHeight() * mRefreshableView.getScale());
-        return mRefreshableView.getScrollY() >= (exactContentHeight - mRefreshableView.getHeight());
+        float exactContentHeight = (float) Math.floor(refreshableView.getContentHeight() * refreshableView.getScale());
+        return refreshableView.getScrollY() >= (exactContentHeight - refreshableView.getHeight());
     }
 
     @Override
     protected void onPtrRestoreInstanceState(Bundle savedInstanceState) {
         super.onPtrRestoreInstanceState(savedInstanceState);
-        mRefreshableView.restoreState(savedInstanceState);
+        refreshableView.restoreState(savedInstanceState);
     }
 
     @Override
     protected void onPtrSaveInstanceState(Bundle saveState) {
         super.onPtrSaveInstanceState(saveState);
-        mRefreshableView.saveState(saveState);
+        refreshableView.saveState(saveState);
     }
 
     @TargetApi(9)
     final class InternalWebViewSDK9 extends WebView {
 
-        // WebView doesn't always scroll back to it's edge so we add some
-        // fuzziness
-        static final int OVERSCROLL_FUZZY_THRESHOLD = 2;
+        // WebView doesn't always scroll back to it's edge so we add some fuzziness
+        static final int OVER_SCROLL_FUZZY_THRESHOLD = 2;
 
-        // WebView seems quite reluctant to overscroll so we use the scale
-        // factor to scale it's value
-        static final float OVERSCROLL_SCALE_FACTOR = 1.5f;
+        // WebView seems quite reluctant to overscroll so we use the scale factor to scale it's value
+        static final float OVER_SCROLL_SCALE_FACTOR = 1.5f;
 
         public InternalWebViewSDK9(Context context, AttributeSet attrs) {
             super(context, attrs);
@@ -151,14 +149,14 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
                     scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
 
             // Does all of the hard work...
-            OverscrollHelper.overScrollBy(PullToRefreshWebView.this, deltaX, scrollX, deltaY, scrollY,
-                    getScrollRange(), OVERSCROLL_FUZZY_THRESHOLD, OVERSCROLL_SCALE_FACTOR, isTouchEvent);
+            OverScrollHelper.overScrollBy(PullToRefreshWebView.this, deltaX, scrollX, deltaY, scrollY,
+                    getScrollRange(), OVER_SCROLL_FUZZY_THRESHOLD, OVER_SCROLL_SCALE_FACTOR, isTouchEvent);
 
             return returnValue;
         }
 
         private int getScrollRange() {
-            return (int) Math.max(0, Math.floor(mRefreshableView.getContentHeight() * mRefreshableView.getScale())
+            return (int) Math.max(0, Math.floor(refreshableView.getContentHeight() * refreshableView.getScale())
                     - (getHeight() - getPaddingBottom() - getPaddingTop()));
         }
     }

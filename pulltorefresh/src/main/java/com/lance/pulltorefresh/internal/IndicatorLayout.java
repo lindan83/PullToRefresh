@@ -38,21 +38,21 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
 
     static final int DEFAULT_ROTATION_ANIMATION_DURATION = 150;
 
-    private Animation mInAnim, mOutAnim;
-    private ImageView mArrowImageView;
+    private Animation inAnim, outAnim;
+    private ImageView arrowImageView;
 
-    private final Animation mRotateAnimation, mResetRotateAnimation;
+    private final Animation rotateAnimation, resetRotateAnimation;
 
     public IndicatorLayout(Context context, PullToRefreshBase.Mode mode) {
         super(context);
-        mArrowImageView = new ImageView(context);
+        arrowImageView = new ImageView(context);
 
         Drawable arrowD = getResources().getDrawable(R.mipmap.indicator_arrow);
-        mArrowImageView.setImageDrawable(arrowD);
+        arrowImageView.setImageDrawable(arrowD);
 
         final int padding = getResources().getDimensionPixelSize(R.dimen.indicator_internal_padding);
-        mArrowImageView.setPadding(padding, padding, padding, padding);
-        addView(mArrowImageView);
+        arrowImageView.setPadding(padding, padding, padding, padding);
+        addView(arrowImageView);
 
         int inAnimResId, outAnimResId;
         switch (mode) {
@@ -62,10 +62,10 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
                 setBackgroundResource(R.drawable.indicator_bg_bottom);
 
                 // Rotate Arrow so it's pointing the correct way
-                mArrowImageView.setScaleType(ScaleType.MATRIX);
+                arrowImageView.setScaleType(ScaleType.MATRIX);
                 Matrix matrix = new Matrix();
                 matrix.setRotate(180f, arrowD.getIntrinsicWidth() / 2f, arrowD.getIntrinsicHeight() / 2f);
-                mArrowImageView.setImageMatrix(matrix);
+                arrowImageView.setImageMatrix(matrix);
                 break;
             default:
             case PULL_FROM_START:
@@ -75,51 +75,51 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
                 break;
         }
 
-        mInAnim = AnimationUtils.loadAnimation(context, inAnimResId);
-        mInAnim.setAnimationListener(this);
+        inAnim = AnimationUtils.loadAnimation(context, inAnimResId);
+        inAnim.setAnimationListener(this);
 
-        mOutAnim = AnimationUtils.loadAnimation(context, outAnimResId);
-        mOutAnim.setAnimationListener(this);
+        outAnim = AnimationUtils.loadAnimation(context, outAnimResId);
+        outAnim.setAnimationListener(this);
 
         final Interpolator interpolator = new LinearInterpolator();
-        mRotateAnimation = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+        rotateAnimation = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
                 0.5f);
-        mRotateAnimation.setInterpolator(interpolator);
-        mRotateAnimation.setDuration(DEFAULT_ROTATION_ANIMATION_DURATION);
-        mRotateAnimation.setFillAfter(true);
+        rotateAnimation.setInterpolator(interpolator);
+        rotateAnimation.setDuration(DEFAULT_ROTATION_ANIMATION_DURATION);
+        rotateAnimation.setFillAfter(true);
 
-        mResetRotateAnimation = new RotateAnimation(-180, 0, Animation.RELATIVE_TO_SELF, 0.5f,
+        resetRotateAnimation = new RotateAnimation(-180, 0, Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f);
-        mResetRotateAnimation.setInterpolator(interpolator);
-        mResetRotateAnimation.setDuration(DEFAULT_ROTATION_ANIMATION_DURATION);
-        mResetRotateAnimation.setFillAfter(true);
+        resetRotateAnimation.setInterpolator(interpolator);
+        resetRotateAnimation.setDuration(DEFAULT_ROTATION_ANIMATION_DURATION);
+        resetRotateAnimation.setFillAfter(true);
 
     }
 
     public final boolean isVisible() {
         Animation currentAnim = getAnimation();
         if (null != currentAnim) {
-            return mInAnim == currentAnim;
+            return inAnim == currentAnim;
         }
 
         return getVisibility() == View.VISIBLE;
     }
 
     public void hide() {
-        startAnimation(mOutAnim);
+        startAnimation(outAnim);
     }
 
     public void show() {
-        mArrowImageView.clearAnimation();
-        startAnimation(mInAnim);
+        arrowImageView.clearAnimation();
+        startAnimation(inAnim);
     }
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        if (animation == mOutAnim) {
-            mArrowImageView.clearAnimation();
+        if (animation == outAnim) {
+            arrowImageView.clearAnimation();
             setVisibility(View.GONE);
-        } else if (animation == mInAnim) {
+        } else if (animation == inAnim) {
             setVisibility(View.VISIBLE);
         }
 
@@ -137,11 +137,11 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
     }
 
     public void releaseToRefresh() {
-        mArrowImageView.startAnimation(mRotateAnimation);
+        arrowImageView.startAnimation(rotateAnimation);
     }
 
     public void pullToRefresh() {
-        mArrowImageView.startAnimation(mResetRotateAnimation);
+        arrowImageView.startAnimation(resetRotateAnimation);
     }
 
 }

@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 /**
  * Created by zwenkai on 2015/12/19.
  */
-public abstract class LoadingLayoutBase extends FrameLayout implements ILoadingLayout{
+public abstract class LoadingLayoutBase extends FrameLayout implements ILoadingLayout {
 
     public LoadingLayoutBase(Context context) {
         super(context);
@@ -26,13 +26,13 @@ public abstract class LoadingLayoutBase extends FrameLayout implements ILoadingL
     }
 
     public final void setHeight(int height) {
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) getLayoutParams();
+        ViewGroup.LayoutParams lp = getLayoutParams();
         lp.height = height;
         requestLayout();
     }
 
     public final void setWidth(int width) {
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) getLayoutParams();
+        ViewGroup.LayoutParams lp = getLayoutParams();
         lp.width = width;
         requestLayout();
     }
@@ -87,7 +87,7 @@ public abstract class LoadingLayoutBase extends FrameLayout implements ILoadingL
      */
     public abstract void reset();
 
-    public void hideAllViews(){
+    public void hideAllViews() {
         hideAllViews(this);
     }
 
@@ -96,24 +96,26 @@ public abstract class LoadingLayoutBase extends FrameLayout implements ILoadingL
     }
 
     private void hideAllViews(View view) {
-        if(view instanceof ViewGroup) {
-            for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++) {
-                hideAllViews(((ViewGroup)view).getChildAt(i));
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            final int count = viewGroup.getChildCount();
+            for (int i = 0; i < count; i++) {
+                hideAllViews(((ViewGroup) view).getChildAt(i));
             }
         } else {
-            if(View.VISIBLE == view.getVisibility()) {
+            if (View.VISIBLE == view.getVisibility()) {
                 view.setVisibility(View.INVISIBLE);
             }
         }
     }
 
     private void showAllViews(View view) {
-        if(view instanceof ViewGroup) {
-            for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++) {
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
                 showAllViews(((ViewGroup) view).getChildAt(i));
             }
         } else {
-            if(View.INVISIBLE == view.getVisibility()) {
+            if (View.INVISIBLE == view.getVisibility()) {
                 view.setVisibility(View.VISIBLE);
             }
         }

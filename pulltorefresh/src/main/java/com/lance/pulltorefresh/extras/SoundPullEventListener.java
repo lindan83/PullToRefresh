@@ -26,10 +26,10 @@ import java.util.HashMap;
 
 public class SoundPullEventListener<V extends View> implements PullToRefreshBase.OnPullEventListener<V> {
 
-    private final Context mContext;
-    private final HashMap<PullToRefreshBase.State, Integer> mSoundMap;
+    private final Context context;
+    private final HashMap<PullToRefreshBase.State, Integer> soundMap;
 
-    private MediaPlayer mCurrentMediaPlayer;
+    private MediaPlayer currentMediaPlayer;
 
     /**
      * Constructor
@@ -37,13 +37,13 @@ public class SoundPullEventListener<V extends View> implements PullToRefreshBase
      * @param context - Context
      */
     public SoundPullEventListener(Context context) {
-        mContext = context;
-        mSoundMap = new HashMap<>();
+        this.context = context;
+        soundMap = new HashMap<>();
     }
 
     @Override
     public final void onPullEvent(PullToRefreshBase<V> refreshView, PullToRefreshBase.State event, PullToRefreshBase.Mode direction) {
-        Integer soundResIdObj = mSoundMap.get(event);
+        Integer soundResIdObj = soundMap.get(event);
         if (null != soundResIdObj) {
             playSound(soundResIdObj);
         }
@@ -61,34 +61,35 @@ public class SoundPullEventListener<V extends View> implements PullToRefreshBase
      *              <var>R.raw.pull_sound</var>)
      */
     public void addSoundEvent(PullToRefreshBase.State event, int resId) {
-        mSoundMap.put(event, resId);
+        soundMap.put(event, resId);
     }
 
     /**
      * Clears all of the previously set sounds and events.
      */
     public void clearSounds() {
-        mSoundMap.clear();
+        soundMap.clear();
     }
 
     /**
      * Gets the current (or last) MediaPlayer instance.
+     *
      * @return MediaPlayer
      */
     public MediaPlayer getCurrentMediaPlayer() {
-        return mCurrentMediaPlayer;
+        return currentMediaPlayer;
     }
 
     private void playSound(int resId) {
         // Stop current player, if there's one playing
-        if (null != mCurrentMediaPlayer) {
-            mCurrentMediaPlayer.stop();
-            mCurrentMediaPlayer.release();
+        if (null != currentMediaPlayer) {
+            currentMediaPlayer.stop();
+            currentMediaPlayer.release();
         }
 
-        mCurrentMediaPlayer = MediaPlayer.create(mContext, resId);
-        if (null != mCurrentMediaPlayer) {
-            mCurrentMediaPlayer.start();
+        currentMediaPlayer = MediaPlayer.create(context, resId);
+        if (null != currentMediaPlayer) {
+            currentMediaPlayer.start();
         }
     }
 }

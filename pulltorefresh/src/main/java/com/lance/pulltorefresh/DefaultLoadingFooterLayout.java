@@ -14,27 +14,27 @@ import android.widget.TextView;
  */
 
 public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
-    private FrameLayout mInnerLayout;
+    private FrameLayout innerLayout;
 
-    private TextView mTvRefreshing;
-    private ProgressBar mPbRefreshing;
+    private TextView tvRefreshing;
+    private ProgressBar pbRefreshing;
 
-    private CharSequence mPullLabel;
-    private CharSequence mRefreshingLabel;
-    private CharSequence mReleaseLabel;
+    private CharSequence pullLabel;
+    private CharSequence refreshingLabel;
+    private CharSequence releaseLabel;
 
     public DefaultLoadingFooterLayout(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.default_loading_footer_layout, this);
-        mInnerLayout = (FrameLayout) findViewById(R.id.fl_inner);
-        mTvRefreshing = (TextView) mInnerLayout.findViewById(R.id.tv_refreshing_text);
-        mPbRefreshing = (ProgressBar) mInnerLayout.findViewById(R.id.pb_refreshing_progress);
-        LayoutParams lp = (LayoutParams) mInnerLayout.getLayoutParams();
+        innerLayout = (FrameLayout) findViewById(R.id.fl_inner);
+        tvRefreshing = (TextView) innerLayout.findViewById(R.id.tv_refreshing_text);
+        pbRefreshing = (ProgressBar) innerLayout.findViewById(R.id.pb_refreshing_progress);
+        LayoutParams lp = (LayoutParams) innerLayout.getLayoutParams();
         lp.gravity = Gravity.TOP;
 
-        mPullLabel = context.getString(R.string.pull_to_refresh_pull_up_label);
-        mRefreshingLabel = context.getString(R.string.pull_to_refresh_loading);
-        mReleaseLabel = context.getString(R.string.pull_to_refresh_release_load_label);
+        pullLabel = context.getString(R.string.pull_to_refresh_pull_up_label);
+        refreshingLabel = context.getString(R.string.pull_to_refresh_loading);
+        releaseLabel = context.getString(R.string.pull_to_refresh_release_load_label);
     }
 
     /**
@@ -44,7 +44,7 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public int getContentSize() {
-        return mInnerLayout.getHeight();
+        return innerLayout.getHeight();
     }
 
     /**
@@ -52,8 +52,8 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public void pullToRefresh() {
-        if (!TextUtils.equals(mTvRefreshing.getText(), mPullLabel)) {
-            mTvRefreshing.setText(mPullLabel);
+        if (!TextUtils.equals(tvRefreshing.getText(), pullLabel)) {
+            tvRefreshing.setText(pullLabel);
         }
     }
 
@@ -62,10 +62,10 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public void releaseToRefresh() {
-        if (TextUtils.equals(mTvRefreshing.getText(), mReleaseLabel)) {
+        if (TextUtils.equals(tvRefreshing.getText(), releaseLabel)) {
             return;
         }
-        mTvRefreshing.setText(mReleaseLabel);
+        tvRefreshing.setText(releaseLabel);
     }
 
     /**
@@ -83,11 +83,11 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public void refreshing() {
-        if (mPbRefreshing.getVisibility() != VISIBLE) {
-            mPbRefreshing.setVisibility(VISIBLE);
+        if (pbRefreshing.getVisibility() != VISIBLE) {
+            pbRefreshing.setVisibility(VISIBLE);
         }
-        if (!TextUtils.equals(mTvRefreshing.getText(), mRefreshingLabel)) {
-            mTvRefreshing.setText(mRefreshingLabel);
+        if (!TextUtils.equals(tvRefreshing.getText(), refreshingLabel)) {
+            tvRefreshing.setText(refreshingLabel);
         }
     }
 
@@ -96,7 +96,7 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public void reset() {
-        mPbRefreshing.setVisibility(GONE);
+        pbRefreshing.setVisibility(GONE);
     }
 
     /**
@@ -107,7 +107,7 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public void setPullLabel(CharSequence pullLabel) {
-        mPullLabel = pullLabel;
+        this.pullLabel = pullLabel;
     }
 
     /**
@@ -118,7 +118,7 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public void setRefreshingLabel(CharSequence refreshingLabel) {
-        mRefreshingLabel = refreshingLabel;
+        this.refreshingLabel = refreshingLabel;
     }
 
     /**
@@ -129,6 +129,6 @@ public class DefaultLoadingFooterLayout extends LoadingLayoutBase {
      */
     @Override
     public void setReleaseLabel(CharSequence releaseLabel) {
-        mReleaseLabel = releaseLabel;
+        this.releaseLabel = releaseLabel;
     }
 }

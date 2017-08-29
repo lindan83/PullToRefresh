@@ -62,13 +62,13 @@ public class PullToRefreshHorizontalScrollView extends PullToRefreshBase<Horizon
 
     @Override
     protected boolean isReadyForPullStart() {
-        return mRefreshableView.getScrollX() == 0;
+        return refreshableView.getScrollX() == 0;
     }
 
     @Override
     protected boolean isReadyForPullEnd() {
-        View scrollViewChild = mRefreshableView.getChildAt(0);
-        return null != scrollViewChild && mRefreshableView.getScrollX() >= (scrollViewChild.getWidth() - getWidth());
+        View scrollViewChild = refreshableView.getChildAt(0);
+        return null != scrollViewChild && refreshableView.getScrollX() >= (scrollViewChild.getWidth() - getWidth());
     }
 
     @TargetApi(9)
@@ -86,7 +86,7 @@ public class PullToRefreshHorizontalScrollView extends PullToRefreshBase<Horizon
                     scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
 
             // Does all of the hard work...
-            OverscrollHelper.overScrollBy(PullToRefreshHorizontalScrollView.this, deltaX, scrollX, deltaY, scrollY,
+            OverScrollHelper.overScrollBy(PullToRefreshHorizontalScrollView.this, deltaX, scrollX, deltaY, scrollY,
                     getScrollRange(), isTouchEvent);
 
             return returnValue;

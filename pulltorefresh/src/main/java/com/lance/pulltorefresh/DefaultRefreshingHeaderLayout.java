@@ -14,40 +14,40 @@ import android.widget.TextView;
  */
 
 public class DefaultRefreshingHeaderLayout extends LoadingLayoutBase {
-    private FrameLayout mInnerLayout;
-    private TextView mTvRefreshing;
-    private ProgressBar mPbRefreshing;
+    private FrameLayout innerLayout;
+    private TextView tvRefreshing;
+    private ProgressBar pbRefreshing;
 
-    private CharSequence mPullLabel;
-    private CharSequence mRefreshingLabel;
-    private CharSequence mReleaseLabel;
+    private CharSequence pullLabel;
+    private CharSequence refreshingLabel;
+    private CharSequence releaseLabel;
 
     public DefaultRefreshingHeaderLayout(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.default_refreshing_header_layout, this);
 
-        mInnerLayout = (FrameLayout) findViewById(R.id.fl_inner);
-        mTvRefreshing = (TextView) mInnerLayout.findViewById(R.id.tv_refreshing_text);
-        mPbRefreshing = (ProgressBar) mInnerLayout.findViewById(R.id.pb_refreshing_progress);
-        LayoutParams lp = (LayoutParams) mInnerLayout.getLayoutParams();
+        innerLayout = (FrameLayout) findViewById(R.id.fl_inner);
+        tvRefreshing = (TextView) innerLayout.findViewById(R.id.tv_refreshing_text);
+        pbRefreshing = (ProgressBar) innerLayout.findViewById(R.id.pb_refreshing_progress);
+        LayoutParams lp = (LayoutParams) innerLayout.getLayoutParams();
         lp.gravity = Gravity.BOTTOM;
 
-        mPullLabel = context.getString(R.string.pull_to_refresh_pull_label);
-        mRefreshingLabel = context.getString(R.string.pull_to_refresh_refreshing);
-        mReleaseLabel = context.getString(R.string.pull_to_refresh_release_label);
+        pullLabel = context.getString(R.string.pull_to_refresh_pull_label);
+        refreshingLabel = context.getString(R.string.pull_to_refresh_refreshing);
+        releaseLabel = context.getString(R.string.pull_to_refresh_release_label);
 
         reset();
     }
 
     @Override
     public final int getContentSize() {
-        return mInnerLayout.getHeight();
+        return innerLayout.getHeight();
     }
 
     @Override
     public final void pullToRefresh() {
-        if (!TextUtils.equals(mTvRefreshing.getText(), mPullLabel)) {
-            mTvRefreshing.setText(mPullLabel);
+        if (!TextUtils.equals(tvRefreshing.getText(), pullLabel)) {
+            tvRefreshing.setText(pullLabel);
         }
     }
 
@@ -57,38 +57,38 @@ public class DefaultRefreshingHeaderLayout extends LoadingLayoutBase {
 
     @Override
     public final void refreshing() {
-        if (mPbRefreshing.getVisibility() != VISIBLE) {
-            mPbRefreshing.setVisibility(VISIBLE);
+        if (pbRefreshing.getVisibility() != VISIBLE) {
+            pbRefreshing.setVisibility(VISIBLE);
         }
-        if (!TextUtils.equals(mRefreshingLabel, mTvRefreshing.getText())) {
-            mTvRefreshing.setText(mRefreshingLabel);
+        if (!TextUtils.equals(refreshingLabel, tvRefreshing.getText())) {
+            tvRefreshing.setText(refreshingLabel);
         }
     }
 
     @Override
     public final void releaseToRefresh() {
-        if (!TextUtils.equals(mReleaseLabel, mTvRefreshing.getText())) {
-            mTvRefreshing.setText(mReleaseLabel);
+        if (!TextUtils.equals(releaseLabel, tvRefreshing.getText())) {
+            tvRefreshing.setText(releaseLabel);
         }
     }
 
     @Override
     public final void reset() {
-        mPbRefreshing.setVisibility(GONE);
+        pbRefreshing.setVisibility(GONE);
     }
 
     @Override
     public void setPullLabel(CharSequence pullLabel) {
-        mPullLabel = pullLabel;
+        this.pullLabel = pullLabel;
     }
 
     @Override
     public void setRefreshingLabel(CharSequence refreshingLabel) {
-        mRefreshingLabel = refreshingLabel;
+        this.refreshingLabel = refreshingLabel;
     }
 
     @Override
     public void setReleaseLabel(CharSequence releaseLabel) {
-        mReleaseLabel = releaseLabel;
+        this.releaseLabel = releaseLabel;
     }
 }

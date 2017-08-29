@@ -7,10 +7,10 @@ import java.util.HashSet;
 
 public class LoadingLayoutProxy implements ILoadingLayout {
 
-    private final HashSet<LoadingLayoutBase> mLoadingLayouts;
+    private final HashSet<LoadingLayoutBase> loadingLayouts;
 
     public LoadingLayoutProxy() {
-        mLoadingLayouts = new HashSet<>();
+        loadingLayouts = new HashSet<>();
     }
 
     /**
@@ -24,47 +24,47 @@ public class LoadingLayoutProxy implements ILoadingLayout {
      */
     public void addLayout(LoadingLayoutBase layout) {
         if (null != layout) {
-            mLoadingLayouts.add(layout);
+            loadingLayouts.add(layout);
         }
     }
 
     @Override
     public void setLastUpdatedLabel(CharSequence label) {
-        for (LoadingLayoutBase layout : mLoadingLayouts) {
+        for (LoadingLayoutBase layout : loadingLayouts) {
             layout.setLastUpdatedLabel(label);
         }
     }
 
     @Override
     public void setLoadingDrawable(Drawable drawable) {
-        for (LoadingLayoutBase layout : mLoadingLayouts) {
+        for (LoadingLayoutBase layout : loadingLayouts) {
             layout.setLoadingDrawable(drawable);
         }
     }
 
     @Override
     public void setRefreshingLabel(CharSequence refreshingLabel) {
-        for (LoadingLayoutBase layout : mLoadingLayouts) {
+        for (LoadingLayoutBase layout : loadingLayouts) {
             layout.setRefreshingLabel(refreshingLabel);
         }
     }
 
     @Override
     public void setPullLabel(CharSequence label) {
-        for (LoadingLayoutBase layout : mLoadingLayouts) {
+        for (LoadingLayoutBase layout : loadingLayouts) {
             layout.setPullLabel(label);
         }
     }
 
     @Override
     public void setReleaseLabel(CharSequence label) {
-        for (LoadingLayoutBase layout : mLoadingLayouts) {
+        for (LoadingLayoutBase layout : loadingLayouts) {
             layout.setReleaseLabel(label);
         }
     }
 
     public void setTextTypeface(Typeface tf) {
-        for (LoadingLayoutBase layout : mLoadingLayouts) {
+        for (LoadingLayoutBase layout : loadingLayouts) {
             layout.setTextTypeface(tf);
         }
     }

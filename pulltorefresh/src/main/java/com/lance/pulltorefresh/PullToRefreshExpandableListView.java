@@ -94,7 +94,7 @@ public class PullToRefreshExpandableListView extends PullToRefreshAdapterViewBas
                     scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
 
             // Does all of the hard work...
-            OverscrollHelper.overScrollBy(PullToRefreshExpandableListView.this, deltaX, scrollX, deltaY, scrollY,
+            OverScrollHelper.overScrollBy(PullToRefreshExpandableListView.this, deltaX, scrollX, deltaY, scrollY,
                     isTouchEvent);
 
             return returnValue;

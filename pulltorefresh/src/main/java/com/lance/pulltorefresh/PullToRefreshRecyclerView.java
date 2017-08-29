@@ -53,28 +53,28 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
      * @return
      */
     private boolean isFirstItemVisible() {
-        RecyclerView.Adapter<?> adapter = mRefreshableView.getAdapter();
+        RecyclerView.Adapter<?> adapter = refreshableView.getAdapter();
         //如果未设置Adapter或者没有数据，仍允许下拉刷新
         if (adapter == null || adapter.getItemCount() == 0) {
             return true;
         }
         //第一个item完全可见，可以刷新
         if (getFirstVisiblePosition() == 0) {
-            return mRefreshableView.getChildAt(0).getTop() >= mRefreshableView.getTop();
+            return refreshableView.getChildAt(0).getTop() >= refreshableView.getTop();
         }
         return false;
     }
 
     private boolean isLastItemVisible() {
-        RecyclerView.Adapter<?> adapter = mRefreshableView.getAdapter();
+        RecyclerView.Adapter<?> adapter = refreshableView.getAdapter();
         //如果未设置Adapter或者没有数据，仍允许上拉加载
         if (adapter == null || adapter.getItemCount() == 0) {
             return true;
         }
         //最后一个Item完全可见，可以刷新
         int lastVisiblePosition = getLastVisiblePosition();
-        if (lastVisiblePosition >= mRefreshableView.getAdapter().getItemCount() - 1) {
-            return mRefreshableView.getChildAt(mRefreshableView.getChildCount() - 1).getBottom() <= mRefreshableView.getBottom();
+        if (lastVisiblePosition >= refreshableView.getAdapter().getItemCount() - 1) {
+            return refreshableView.getChildAt(refreshableView.getChildCount() - 1).getBottom() <= refreshableView.getBottom();
         }
         return false;
     }
@@ -85,8 +85,8 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
      * @return
      */
     private int getFirstVisiblePosition() {
-        View firstVisibleChild = mRefreshableView.getChildAt(0);
-        return firstVisibleChild != null ? mRefreshableView.getChildAdapterPosition(firstVisibleChild) : -1;
+        View firstVisibleChild = refreshableView.getChildAt(0);
+        return firstVisibleChild != null ? refreshableView.getChildAdapterPosition(firstVisibleChild) : -1;
     }
 
     /**
@@ -95,7 +95,7 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
      * @return
      */
     private int getLastVisiblePosition() {
-        View lastVisibleChild = mRefreshableView.getChildAt(mRefreshableView.getChildCount() - 1);
-        return lastVisibleChild != null ? mRefreshableView.getChildAdapterPosition(lastVisibleChild) : -1;
+        View lastVisibleChild = refreshableView.getChildAt(refreshableView.getChildCount() - 1);
+        return lastVisibleChild != null ? refreshableView.getChildAdapterPosition(lastVisibleChild) : -1;
     }
 }

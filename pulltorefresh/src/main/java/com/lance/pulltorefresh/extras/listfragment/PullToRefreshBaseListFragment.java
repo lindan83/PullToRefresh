@@ -24,7 +24,7 @@ import com.lance.pulltorefresh.PullToRefreshBase;
 
 abstract class PullToRefreshBaseListFragment<T extends PullToRefreshBase<? extends AbsListView>> extends ListFragment {
 
-    private T mPullToRefreshListView;
+    private T pullToRefreshListView;
 
     @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,8 +36,8 @@ abstract class PullToRefreshBaseListFragment<T extends PullToRefreshBase<? exten
         // Remove ListView and add PullToRefreshListView in its place
         int lvIndex = parent.indexOfChild(lv);
         parent.removeViewAt(lvIndex);
-        mPullToRefreshListView = onCreatePullToRefreshListView(inflater, savedInstanceState);
-        parent.addView(mPullToRefreshListView, lvIndex, lv.getLayoutParams());
+        pullToRefreshListView = onCreatePullToRefreshListView(inflater, savedInstanceState);
+        parent.addView(pullToRefreshListView, lvIndex, lv.getLayoutParams());
 
         return layout;
     }
@@ -46,7 +46,7 @@ abstract class PullToRefreshBaseListFragment<T extends PullToRefreshBase<? exten
      * @return The {@link PullToRefreshBase} attached to this ListFragment.
      */
     public final T getPullToRefreshListView() {
-        return mPullToRefreshListView;
+        return pullToRefreshListView;
     }
 
     /**

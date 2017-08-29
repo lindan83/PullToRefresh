@@ -20,10 +20,10 @@ import android.util.Log;
 import android.view.View;
 
 @TargetApi(9)
-public final class OverscrollHelper {
+public final class OverScrollHelper {
 
-    static final String LOG_TAG = "OverscrollHelper";
-    static final float DEFAULT_OVERSCROLL_SCALE = 1f;
+    private static final String LOG_TAG = "OverScrollHelper";
+    private static final float DEFAULT_OVER_SCROLL_SCALE = 1f;
 
     /**
      * Helper method for Overscrolling that encapsulates all of the necessary
@@ -71,7 +71,7 @@ public final class OverscrollHelper {
      */
     public static void overScrollBy(final PullToRefreshBase<?> view, final int deltaX, final int scrollX,
                                     final int deltaY, final int scrollY, final int scrollRange, final boolean isTouchEvent) {
-        overScrollBy(view, deltaX, scrollX, deltaY, scrollY, scrollRange, 0, DEFAULT_OVERSCROLL_SCALE, isTouchEvent);
+        overScrollBy(view, deltaX, scrollX, deltaY, scrollY, scrollRange, 0, DEFAULT_OVER_SCROLL_SCALE, isTouchEvent);
     }
 
     /**

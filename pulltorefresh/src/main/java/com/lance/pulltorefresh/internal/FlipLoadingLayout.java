@@ -65,19 +65,19 @@ public class FlipLoadingLayout extends LoadingLayout {
              * square with each side the size of the largest drawable dimension.
              * This is so that it doesn't clip when rotated.
              */
-            ViewGroup.LayoutParams lp = mHeaderImage.getLayoutParams();
+            ViewGroup.LayoutParams lp = headerImage.getLayoutParams();
             lp.width = lp.height = Math.max(dHeight, dWidth);
-            mHeaderImage.requestLayout();
+            headerImage.requestLayout();
 
             /**
              * We now rotate the Drawable so that is at the correct rotation,
              * and is centered.
              */
-            mHeaderImage.setScaleType(ScaleType.MATRIX);
+            headerImage.setScaleType(ScaleType.MATRIX);
             Matrix matrix = new Matrix();
             matrix.postTranslate((lp.width - dWidth) / 2f, (lp.height - dHeight) / 2f);
             matrix.postRotate(getDrawableRotationAngle(), lp.width / 2f, lp.height / 2f);
-            mHeaderImage.setImageMatrix(matrix);
+            headerImage.setImageMatrix(matrix);
         }
     }
 
@@ -89,28 +89,28 @@ public class FlipLoadingLayout extends LoadingLayout {
     @Override
     protected void pullToRefreshImpl() {
         // Only start reset Animation, we've previously show the rotate anim
-        if (mRotateAnimation == mHeaderImage.getAnimation()) {
-            mHeaderImage.startAnimation(mResetRotateAnimation);
+        if (mRotateAnimation == headerImage.getAnimation()) {
+            headerImage.startAnimation(mResetRotateAnimation);
         }
     }
 
     @Override
     protected void refreshingImpl() {
-        mHeaderImage.clearAnimation();
-        mHeaderImage.setVisibility(View.INVISIBLE);
-        mHeaderProgress.setVisibility(View.VISIBLE);
+        headerImage.clearAnimation();
+        headerImage.setVisibility(View.INVISIBLE);
+        headerProgress.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void releaseToRefreshImpl() {
-        mHeaderImage.startAnimation(mRotateAnimation);
+        headerImage.startAnimation(mRotateAnimation);
     }
 
     @Override
     protected void resetImpl() {
-        mHeaderImage.clearAnimation();
-        mHeaderProgress.setVisibility(View.GONE);
-        mHeaderImage.setVisibility(View.VISIBLE);
+        headerImage.clearAnimation();
+        headerProgress.setVisibility(View.GONE);
+        headerImage.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -120,9 +120,9 @@ public class FlipLoadingLayout extends LoadingLayout {
 
     private float getDrawableRotationAngle() {
         float angle = 0f;
-        switch (mMode) {
+        switch (mode) {
             case PULL_FROM_END:
-                if (mScrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
+                if (scrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
                     angle = 90f;
                 } else {
                     angle = 180f;
@@ -130,7 +130,7 @@ public class FlipLoadingLayout extends LoadingLayout {
                 break;
 
             case PULL_FROM_START:
-                if (mScrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
+                if (scrollDirection == PullToRefreshBase.Orientation.HORIZONTAL) {
                     angle = 270f;
                 }
                 break;

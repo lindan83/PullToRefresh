@@ -74,9 +74,9 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
         super(context, mode);
     }
 
-    private JsValueCallback mJsCallback;
-    private final AtomicBoolean mIsReadyForPullDown = new AtomicBoolean(false);
-    private final AtomicBoolean mIsReadyForPullUp = new AtomicBoolean(false);
+    private JsValueCallback jsCallback;
+    private final AtomicBoolean isReadyForPullDown = new AtomicBoolean(false);
+    private final AtomicBoolean isReadyForPullUp = new AtomicBoolean(false);
 
     @SuppressLint("JavascriptInterface")
     @Override
@@ -84,8 +84,8 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
         WebView webView = super.createRefreshableView(context, attrs);
 
         // Need to add JS Interface so we can get the response back
-        mJsCallback = new JsValueCallback();
-        webView.addJavascriptInterface(mJsCallback, JS_INTERFACE_PKG);
+        jsCallback = new JsValueCallback();
+        webView.addJavascriptInterface(jsCallback, JS_INTERFACE_PKG);
 
         return webView;
     }
@@ -98,7 +98,7 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
         // Response will be given to JsValueCallback, which will update
         // mIsReadyForPullDown
 
-        return mIsReadyForPullDown.get();
+        return isReadyForPullDown.get();
     }
 
     @Override
@@ -109,7 +109,7 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
         // Response will be given to JsValueCallback, which will update
         // mIsReadyForPullUp
 
-        return mIsReadyForPullUp.get();
+        return isReadyForPullUp.get();
     }
 
     /**
@@ -120,11 +120,11 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
     final class JsValueCallback {
 
         public void isReadyForPullUpResponse(boolean response) {
-            mIsReadyForPullUp.set(response);
+            isReadyForPullUp.set(response);
         }
 
         public void isReadyForPullDownResponse(boolean response) {
-            mIsReadyForPullDown.set(response);
+            isReadyForPullDown.set(response);
         }
     }
 }
