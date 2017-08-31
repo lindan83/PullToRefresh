@@ -9,7 +9,6 @@ import android.view.View;
  * Created by lindan on 16-12-6.
  * 扩展PullToRefresh开源框架，支持RecyclerView
  */
-
 public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
     public PullToRefreshRecyclerView(Context context) {
         super(context);
@@ -49,8 +48,6 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
     /**
      * 判断第一个Item是否完全可见
-     *
-     * @return
      */
     private boolean isFirstItemVisible() {
         RecyclerView.Adapter<?> adapter = refreshableView.getAdapter();
@@ -59,10 +56,7 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
             return true;
         }
         //第一个item完全可见，可以刷新
-        if (getFirstVisiblePosition() == 0) {
-            return refreshableView.getChildAt(0).getTop() >= refreshableView.getTop();
-        }
-        return false;
+        return getFirstVisiblePosition() == 0 && refreshableView.getChildAt(0).getTop() >= refreshableView.getTop();
     }
 
     private boolean isLastItemVisible() {
@@ -73,16 +67,11 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
         }
         //最后一个Item完全可见，可以刷新
         int lastVisiblePosition = getLastVisiblePosition();
-        if (lastVisiblePosition >= refreshableView.getAdapter().getItemCount() - 1) {
-            return refreshableView.getChildAt(refreshableView.getChildCount() - 1).getBottom() <= refreshableView.getBottom();
-        }
-        return false;
+        return lastVisiblePosition >= refreshableView.getAdapter().getItemCount() - 1 && refreshableView.getChildAt(refreshableView.getChildCount() - 1).getBottom() <= refreshableView.getBottom();
     }
 
     /**
      * 获取第一个可见Item的位置
-     *
-     * @return
      */
     private int getFirstVisiblePosition() {
         View firstVisibleChild = refreshableView.getChildAt(0);
@@ -91,8 +80,6 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
     /**
      * 获取最后一个可见item的位置
-     *
-     * @return
      */
     private int getLastVisiblePosition() {
         View lastVisibleChild = refreshableView.getChildAt(refreshableView.getChildCount() - 1);

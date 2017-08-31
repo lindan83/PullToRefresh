@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,11 +12,9 @@
  *******************************************************************************/
 package com.lance.pulltorefresh;
 
-import android.annotation.TargetApi;
 import android.util.Log;
 import android.view.View;
 
-@TargetApi(9)
 public final class OverScrollHelper {
 
     private static final String LOG_TAG = "OverScrollHelper";
@@ -138,7 +133,7 @@ public final class OverScrollHelper {
                         // If we're currently at zero, we're about to start
                         // overscrolling, so change the state
                         if (currentScrollValue == 0) {
-                            view.setState(PullToRefreshBase.State.OVERSCROLLING);
+                            view.setState(PullToRefreshBase.State.OVER_SCROLLING);
                         }
 
                         view.setHeaderScroll((int) (scaleFactor * (currentScrollValue + newScrollValue)));
@@ -150,7 +145,7 @@ public final class OverScrollHelper {
                         // If we're currently at zero, we're about to start
                         // overscrolling, so change the state
                         if (currentScrollValue == 0) {
-                            view.setState(PullToRefreshBase.State.OVERSCROLLING);
+                            view.setState(PullToRefreshBase.State.OVER_SCROLLING);
                         }
 
                         view.setHeaderScroll((int) (scaleFactor * (currentScrollValue + newScrollValue - scrollRange)));
@@ -160,7 +155,7 @@ public final class OverScrollHelper {
                     // Means we've stopped overscrolling, so scroll back to 0
                     view.setState(PullToRefreshBase.State.RESET);
                 }
-            } else if (isTouchEvent && PullToRefreshBase.State.OVERSCROLLING == view.getState()) {
+            } else if (isTouchEvent && PullToRefreshBase.State.OVER_SCROLLING == view.getState()) {
                 // This condition means that we were overscrolling from a fling,
                 // but the user has touched the View and is now overscrolling
                 // from touch instead. We need to just reset.

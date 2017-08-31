@@ -17,8 +17,6 @@ package com.lance.pulltorefresh;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ScrollView;
@@ -49,11 +47,7 @@ public class PullToRefreshScrollView extends PullToRefreshBase<ScrollView> {
     @Override
     protected ScrollView createRefreshableView(Context context, AttributeSet attrs) {
         ScrollView scrollView;
-        if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
-            scrollView = new InternalScrollViewSDK9(context, attrs);
-        } else {
-            scrollView = new ScrollView(context, attrs);
-        }
+        scrollView = new InternalScrollViewSDK9(context, attrs);
 
         scrollView.setId(R.id.scrollview);
         return scrollView;

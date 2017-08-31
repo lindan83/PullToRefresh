@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,8 +15,6 @@ package com.lance.pulltorefresh;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -151,7 +146,6 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
             smoothScrollToAndBack(getFooterSize() * 2);
             return true;
         }
-
         return false;
     }
 
@@ -202,8 +196,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
     @Override
     public final boolean isPullToRefreshOverScrollEnabled() {
-        return VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD && overScrollEnabled
-                && OverScrollHelper.isAndroidOverScrollEnabled(refreshableView);
+        return overScrollEnabled && OverScrollHelper.isAndroidOverScrollEnabled(refreshableView);
     }
 
     @Override
@@ -234,7 +227,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         }
 
         switch (action) {
-            case MotionEvent.ACTION_MOVE: {
+            case MotionEvent.ACTION_MOVE:
                 // If we're refreshing, and the flag is set. Eat all MOVE events
                 if (!scrollingWhileRefreshingEnabled && isRefreshing()) {
                     return true;
@@ -278,17 +271,14 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                     }
                 }
                 break;
-            }
-            case MotionEvent.ACTION_DOWN: {
+            case MotionEvent.ACTION_DOWN:
                 if (isReadyForPull()) {
                     lastMotionY = initialMotionY = event.getY();
                     lastMotionX = initialMotionX = event.getX();
                     isBeingDragged = false;
                 }
                 break;
-            }
         }
-
         return isBeingDragged;
     }
 
@@ -316,7 +306,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         }
 
         switch (event.getAction()) {
-            case MotionEvent.ACTION_MOVE: {
+            case MotionEvent.ACTION_MOVE:
                 if (isBeingDragged) {
                     lastMotionY = event.getY();
                     lastMotionX = event.getX();
@@ -324,19 +314,17 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                     return true;
                 }
                 break;
-            }
 
-            case MotionEvent.ACTION_DOWN: {
+            case MotionEvent.ACTION_DOWN:
                 if (isReadyForPull()) {
                     lastMotionY = initialMotionY = event.getY();
                     lastMotionX = initialMotionX = event.getX();
                     return true;
                 }
                 break;
-            }
 
             case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP: {
+            case MotionEvent.ACTION_UP:
                 if (isBeingDragged) {
                     isBeingDragged = false;
 
@@ -359,9 +347,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                     return true;
                 }
                 break;
-            }
         }
-
         return false;
     }
 
@@ -561,7 +547,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
             case MANUAL_REFRESHING:
                 onRefreshing(params[0]);
                 break;
-            case OVERSCROLLING:
+            case OVER_SCROLLING:
                 // NO-OP
                 break;
         }
@@ -868,7 +854,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         // Update the Refreshable View layout
         refreshRefreshableViewSize(w, h);
 
-        /**
+        /*
          * As we're currently in a Layout Pass, we need to schedule another one
          * to layout any changes we've made here
          */
@@ -1571,7 +1557,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
          * When the UI is currently overscrolling, caused by a fling on the
          * Refreshable View.
          */
-        OVERSCROLLING(0x10);
+        OVER_SCROLLING(0x10);
 
         /**
          * Maps an int to a specific state. This is needed when saving state.
@@ -1590,14 +1576,14 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
             return RESET;
         }
 
-        private int mIntValue;
+        private int intValue;
 
         State(int intValue) {
-            mIntValue = intValue;
+            this.intValue = intValue;
         }
 
         int getIntValue() {
-            return mIntValue;
+            return intValue;
         }
     }
 

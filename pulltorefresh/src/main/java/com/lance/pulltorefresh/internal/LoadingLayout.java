@@ -1,12 +1,9 @@
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
- * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +12,6 @@
  *******************************************************************************/
 package com.lance.pulltorefresh.internal;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -38,10 +34,7 @@ import com.lance.pulltorefresh.LoadingLayoutBase;
 import com.lance.pulltorefresh.PullToRefreshBase;
 import com.lance.pulltorefresh.R;
 
-
-@SuppressLint("ViewConstructor")
 abstract class LoadingLayout extends LoadingLayoutBase {
-
     static final String LOG_TAG = "PullToRefresh-LoadingLayout";
 
     static final Interpolator ANIMATION_INTERPOLATOR = new LinearInterpolator();
@@ -175,7 +168,6 @@ abstract class LoadingLayout extends LoadingLayoutBase {
 
         // Set Drawable, and save width/height
         setLoadingDrawable(imageDrawable);
-
         reset();
     }
 
